@@ -185,55 +185,58 @@ function Shell() {
         </div>
       </header>
 
-      <div className="relative">
+      <div className="relative pt-14 lg:pt-0">
         <AnimatePresence mode="wait">
           {activeScreen === "call" ? (
-            <motion.section key="call" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mx-auto grid min-h-screen max-w-7xl gap-6 px-4 pb-8 pt-24 sm:pb-56 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:pb-40">
-              <div className="order-2 lg:order-1">
-                <div className="mb-5 flex flex-wrap items-center gap-3">
-                  <ConsentBadge certificate={certificate} />
-                  <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/55">{scenario === "idle" ? "no active call" : scenario.replace("_", " ")}</div>
+            <motion.section key="call" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="mx-auto max-w-7xl px-4 pb-16 pt-24">
+              {/* Hero two-column grid — kept balanced on desktop */}
+              <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+                <div className="order-2 lg:order-1">
+                  <div className="mb-5 flex flex-wrap items-center gap-3">
+                    <ConsentBadge certificate={certificate} />
+                    <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/55">{scenario === "idle" ? "no active call" : scenario.replace("_", " ")}</div>
+                  </div>
+                  <h1 className="max-w-2xl text-5xl font-semibold tracking-[-0.055em] sm:text-7xl">Trust is being calculated in real time.</h1>
+                  <p className="mt-5 max-w-xl text-lg leading-8 text-white/58">{transcript}</p>
+                  <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+                    <button type="button" onClick={() => setScreen("reasoning")} className="rounded-lg border border-cyan/25 bg-cyan/10 px-5 py-3 text-sm font-medium text-cyan transition hover:bg-cyan/15">
+                      View reasoning
+                    </button>
+                    <button type="button" disabled={!honeypotAllowed} onClick={() => void activateHoneypot()} className="rounded-lg border border-coral/30 bg-coral/10 px-5 py-3 text-sm font-medium text-coral transition hover:bg-coral/15 disabled:cursor-not-allowed disabled:opacity-45">
+                      {honeypotAllowed ? "Activate honeypot" : "Honeypot blocked"}
+                    </button>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <ImplementationBadge level="heuristic" detail="Trust scoring uses explainable heuristic math." />
+                    <ImplementationBadge level="live" detail="Guardian warning uses browser speech synthesis." />
+                    <ImplementationBadge level="seeded" detail="Scenario and fingerprint data are seeded locally." />
+                  </div>
+                  <ProofStrip honeypotProvider={honeypotProvider} onOpenProof={() => setScreen("proof")} />
                 </div>
-                <h1 className="max-w-2xl text-5xl font-semibold tracking-[-0.055em] sm:text-7xl">Trust is being calculated in real time.</h1>
-                <p className="mt-5 max-w-xl text-lg leading-8 text-white/58">{transcript}</p>
-                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <button type="button" onClick={() => setScreen("reasoning")} className="rounded-lg border border-cyan/25 bg-cyan/10 px-5 py-3 text-sm font-medium text-cyan transition hover:bg-cyan/15">
-                    View reasoning
-                  </button>
-                  <button type="button" disabled={!honeypotAllowed} onClick={() => void activateHoneypot()} className="rounded-lg border border-coral/30 bg-coral/10 px-5 py-3 text-sm font-medium text-coral transition hover:bg-coral/15 disabled:cursor-not-allowed disabled:opacity-45">
-                    {honeypotAllowed ? "Activate honeypot" : "Honeypot blocked"}
-                  </button>
-                </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <ImplementationBadge level="heuristic" detail="Trust scoring uses explainable heuristic math." />
-                  <ImplementationBadge level="live" detail="Guardian warning uses browser speech synthesis." />
-                  <ImplementationBadge level="seeded" detail="Scenario and fingerprint data are seeded locally." />
-                </div>
-                <ProofStrip honeypotProvider={honeypotProvider} onOpenProof={() => setScreen("proof")} />
-                <div className="mt-5">
-                  <VoiceTwinDemo />
-                </div>
-                <div className="mt-5">
-                  <LiveMicPanel />
+                <div className="order-1 lg:order-2">
+                  <TrustRing score={trustScore} color={trustColor} scenario={scenario} audioLevel={audioLevel} />
+                  <div className="text-center text-sm uppercase tracking-[0.26em] text-white/45">live telecom trust signal</div>
+                  <div className="mt-5">
+                    <GuardianSOSPanel
+                      status={guardianAlert.status}
+                      onResolve={(outcome) => {
+                        guardianAlert.resolve(outcome);
+                        addAuditEvent({
+                          type: "guardian",
+                          label: outcome === "safe" ? "Guardian marked caller safe" : "Guardian call requested",
+                          detail: outcome === "safe" ? "Human override resolved the high-risk alert as safe." : "User requested help from trusted guardian.",
+                          level: "live"
+                        });
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="order-1 lg:order-2">
-                <TrustRing score={trustScore} color={trustColor} scenario={scenario} audioLevel={audioLevel} />
-                <div className="text-center text-sm uppercase tracking-[0.26em] text-white/45">live telecom trust signal</div>
-                <div className="mt-5">
-                  <GuardianSOSPanel
-                    status={guardianAlert.status}
-                    onResolve={(outcome) => {
-                      guardianAlert.resolve(outcome);
-                      addAuditEvent({
-                        type: "guardian",
-                        label: outcome === "safe" ? "Guardian marked caller safe" : "Guardian call requested",
-                        detail: outcome === "safe" ? "Human override resolved the high-risk alert as safe." : "User requested help from trusted guardian.",
-                        level: "live"
-                      });
-                    }}
-                  />
-                </div>
+
+              {/* Full-width panels below the hero grid */}
+              <div className="mt-8 grid gap-6 lg:grid-cols-2">
+                <VoiceTwinDemo />
+                <LiveMicPanel />
               </div>
             </motion.section>
           ) : activeScreen === "proof" ? (
@@ -273,7 +276,7 @@ function Shell() {
         ))}
       </div>
       <DemoSimulator />
-      <div className="relative z-20 mx-3 mb-6 flex justify-end gap-2 sm:fixed sm:bottom-[92px] sm:right-4 sm:z-40 sm:mx-0 sm:mb-0 sm:flex-col xl:hidden">
+      <div className="relative z-20 mx-3 mb-6 flex justify-end gap-2 sm:fixed sm:bottom-6 sm:right-4 sm:z-40 sm:mx-0 sm:mb-0 sm:flex-col xl:hidden">
         <button type="button" onClick={runJudgeDemo} className="inline-flex items-center justify-center gap-2 rounded-lg border border-mint/25 bg-mint/10 px-3 py-2 text-sm text-mint backdrop-blur-xl">
           <Play className="h-4 w-4" />
           Judge
