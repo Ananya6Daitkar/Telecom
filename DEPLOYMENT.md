@@ -23,7 +23,7 @@ npm run build
 
 ## Demo URL
 
-**Live:** https://telecom-phi.vercel.app
+**Live:** https://telecom-goplpe98l-ananyapatil8010-7407s-projects.vercel.app
 
 Confirm these screens before submitting:
 
