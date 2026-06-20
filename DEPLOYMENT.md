@@ -23,7 +23,9 @@ npm run build
 
 ## Demo URL
 
-After deploy, use the Vercel production URL for judges. Confirm these screens before submitting:
+**Live:** https://telecom-phi.vercel.app
+
+Confirm these screens before submitting:
 
 - Call
 - Proof

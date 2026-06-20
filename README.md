@@ -2,6 +2,8 @@
 
 > Every call gets a trust score before you say hello.
 
+🔴 **Live Demo:** [telecom-phi.vercel.app](https://telecom-phi.vercel.app)
+
 VoxHalo is a real-time telecom fraud detection platform built with Next.js. It analyzes incoming voice calls using heuristic trust scoring, speaker diarization, voice fingerprinting, and an AI-powered honeypot to identify scams, cloned voices, and social engineering attempts — all in the browser.
 
 ---
