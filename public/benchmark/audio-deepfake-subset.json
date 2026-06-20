@@ -1,0 +1,266 @@
+{
+  "generatedAt": "2026-06-20T08:02:59.822Z",
+  "datasetName": "Audio Deepfake Detection Dataset",
+  "datasetPath": "/Users/nalinee/Downloads/archive",
+  "disclosure": "Local subset evaluation using folder labels. This is a lightweight acoustic-feature baseline, not a trained AASIST/RawNet checkpoint.",
+  "subset": {
+    "bonafide": 100,
+    "spoof": 91,
+    "train": 137,
+    "test": 54,
+    "skipped": 9
+  },
+  "metrics": {
+    "evaluation": "deterministic 70/30 held-out split",
+    "threshold": 0.528,
+    "accuracy": 0.8333333333333334,
+    "precision": 0.8571428571428571,
+    "recall": 0.8275862068965517,
+    "far": 0.16,
+    "frr": 0.1724137931034483,
+    "eer": 0.16620689655172416,
+    "confusion": {
+      "trueSpoof": 24,
+      "falseSpoof": 4,
+      "trueBonafide": 21,
+      "falseBonafide": 5
+    }
+  },
+  "baselineModel": {
+    "kind": "logistic_regression_acoustic_features",
+    "featureOrder": [
+      "logDuration",
+      "logRmsMean",
+      "logRmsStd",
+      "zcrMean",
+      "zcrStd",
+      "roughnessMean",
+      "peakMean",
+      "dynamicRangeProxy",
+      "sampleRateRatio"
+    ],
+    "threshold": 0.528,
+    "weights": [
+      -1.1505796873425156,
+      -2.34196615948882,
+      1.3195020863459475,
+      -1.3784360240075844,
+      0.5805541917942554,
+      0.7373751144394318,
+      1.3883412580068697,
+      -0.5382089388178,
+      -3.0568861338137427
+    ],
+    "bias": 0.9792329373630847,
+    "scaler": {
+      "meanValues": [
+        0.842595492695321,
+        -1.3212837299760678,
+        -1.4418478665890613,
+        0.11676690101108733,
+        0.10007799847384058,
+        0.010083723185991987,
+        0.2053307704676211,
+        3.9979893796287667,
+        0.9112226277372275
+      ],
+      "stdValues": [
+        0.2394990869847228,
+        0.21757045410496614,
+        0.23296591593232346,
+        0.04812416761117012,
+        0.038913800174455886,
+        0.007306762724641628,
+        0.08931284158067877,
+        0.7647924468668301,
+        0.14632850590800894
+      ]
+    }
+  },
+  "bySource": [
+    {
+      "source": "real_samples",
+      "label": "bonafide",
+      "count": 100,
+      "avgSpoofScore": 0.2541135811016326
+    },
+    {
+      "source": "FlashSpeech",
+      "label": "spoof",
+      "count": 15,
+      "avgSpoofScore": 0.961284711579916
+    },
+    {
+      "source": "NaturalSpeech3",
+      "label": "spoof",
+      "count": 14,
+      "avgSpoofScore": 0.9973001610193611
+    },
+    {
+      "source": "PromptTTS2",
+      "label": "spoof",
+      "count": 14,
+      "avgSpoofScore": 0.9928459592535088
+    },
+    {
+      "source": "VALLE",
+      "label": "spoof",
+      "count": 6,
+      "avgSpoofScore": 0.5701444578189224
+    },
+    {
+      "source": "VoiceBox",
+      "label": "spoof",
+      "count": 14,
+      "avgSpoofScore": 0.9330142080812955
+    },
+    {
+      "source": "seedtts_files",
+      "label": "spoof",
+      "count": 14,
+      "avgSpoofScore": 0.47211868142476027
+    },
+    {
+      "source": "xTTS",
+      "label": "spoof",
+      "count": 14,
+      "avgSpoofScore": 0.8216139235470881
+    }
+  ],
+  "sampleScores": [
+    {
+      "file": "1089_134686_000002_000001.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.35173126904285773
+    },
+    {
+      "file": "1089_134686_000011_000003.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.18446247595705798
+    },
+    {
+      "file": "1089_134686_000026_000001.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.1748607217358182
+    },
+    {
+      "file": "1089_134691_000003_000000.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.17014906708794392
+    },
+    {
+      "file": "1089_134691_000015_000000.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.6530857840668982
+    },
+    {
+      "file": "1089_134691_000035_000001.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.13129772709774368
+    },
+    {
+      "file": "1089_134691_000053_000002.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.13865706814311426
+    },
+    {
+      "file": "1188_133604_000038_000003.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.10056142605166148
+    },
+    {
+      "file": "121_121726_000025_000001.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.22484829296592787
+    },
+    {
+      "file": "121_127105_000016_000006.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.06764883590573138
+    },
+    {
+      "file": "1284_1180_000018_000001.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.8420132903865035
+    },
+    {
+      "file": "1284_1181_000005_000000.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.6958970917571525
+    },
+    {
+      "file": "1320_122612_000006_000002.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.4070788590960435
+    },
+    {
+      "file": "1320_122612_000028_000000.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.07933464110103308
+    },
+    {
+      "file": "1320_122612_000044_000005.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.5276922914934145
+    },
+    {
+      "file": "1320_122617_000064_000002.wav",
+      "label": "bonafide",
+      "source": "real_samples",
+      "score": 0.3722917107114979
+    }
+  ],
+  "skipped": [
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/1089-134686-0008.valle_.wav",
+      "reason": "Unsupported WAV format 3"
+    },
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/31.valle_.wav",
+      "reason": "Unsupported WAV format 3"
+    },
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/64.valle_.wav",
+      "reason": "Unsupported WAV format 3"
+    },
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/valle2_hard_samples_40_valle.0.wav",
+      "reason": "Unsupported WAV format 3"
+    },
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/valle2_hard_samples_48_valle.0.wav",
+      "reason": "Unsupported WAV format 3"
+    },
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/valle2_hard_samples_89_valle.1.wav",
+      "reason": "Unsupported WAV format 3"
+    },
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/valle2_librispeech_74_cross_infer_valle.vocos_.0.wav",
+      "reason": "Unsupported WAV format 3"
+    },
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/valle2_vctk_28_10s_valle.vocos_.0.wav",
+      "reason": "Unsupported WAV format 3"
+    },
+    {
+      "file": "/Users/nalinee/Downloads/archive/VALLE/valle2_vctk_36_3s_valle.vocos_.0.wav",
+      "reason": "Unsupported WAV format 3"
+    }
+  ]
+}
